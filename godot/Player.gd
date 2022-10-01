@@ -52,3 +52,4 @@ func _on_Area_area_entered(area):
 		print_debug("died!")
 	if area.is_in_group("food"):
 		print_debug("fed!")
+		area.collect()
