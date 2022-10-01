@@ -25,7 +25,7 @@ func _generate_maze(size):
 	var min_dist = 3 # 3 does nothing, 4 is too much
 	for i in range(1, maze.size() - 1):
 		for j in range(1, maze.size() - 1):
-			print_debug(i, " ", j, " ", maze.size())
+			# print_debug(i, " ", j, " ", maze.size())
 			var distances = _distances_from(maze, i, j)
 			var cell = maze[i][j]
 			if cell.has_left_wall and (distances[i - 1][j] > max_dist or distances[i - 1][j] < min_dist):

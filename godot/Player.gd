@@ -46,3 +46,7 @@ func _process(delta):
 
 	var direction = (target_position - translation).normalized()
 	translation += direction * delta * speed
+
+func _on_Area_area_entered(area):
+	if area.is_in_group("enemy"):
+		print_debug("died!")
