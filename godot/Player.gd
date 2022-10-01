@@ -50,3 +50,5 @@ func _process(delta):
 func _on_Area_area_entered(area):
 	if area.is_in_group("enemy"):
 		print_debug("died!")
+	if area.is_in_group("food"):
+		print_debug("fed!")

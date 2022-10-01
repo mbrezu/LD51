@@ -3,6 +3,7 @@ extends Spatial
 var cell_scene = load("res://Cell.tscn")
 var player_scene = load("res://Player.tscn")
 var enemy_scene = load("res://Enemy.tscn")
+var food_scene = load("res://Food.tscn")
 
 var Maze = preload("res://Maze.gd")
 
@@ -26,9 +27,19 @@ func _ready():
 	add_enemy(size - 2, 1, maze)
 	add_enemy(size - 2, size - 2, maze)
 
+	for _i in range(size):
+		var x = randi() % size
+		var y = randi() % size
+		add_food(x, y, maze)
+
 
 func add_enemy(x, y, maze):
 	var enemy = enemy_scene.instance()
 	enemy.initialize(x, y, maze)
 	add_child(enemy)
 
+
+func add_food(x, y, maze):
+	var food = food_scene.instance()
+	food.initialize(x, y, maze)
+	add_child(food)
