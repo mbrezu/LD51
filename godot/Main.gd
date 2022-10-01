@@ -2,6 +2,7 @@ extends Spatial
 
 var cell_scene = load("res://Cell.tscn")
 var player_scene = load("res://Player.tscn")
+var enemy_scene = load("res://Enemy.tscn")
 
 var Maze = preload("res://Maze.gd")
 
@@ -19,3 +20,15 @@ func _ready():
 	var player = player_scene.instance()
 	player.initialize(maze)
 	add_child(player)
+
+	add_enemy(1, 1, maze)
+	add_enemy(1, size - 2, maze)
+	add_enemy(size - 2, 1, maze)
+	add_enemy(size - 2, size - 2, maze)
+
+
+func add_enemy(x, y, maze):
+	var enemy = enemy_scene.instance()
+	enemy.initialize(x, y, maze)
+	add_child(enemy)
+
