@@ -17,9 +17,6 @@ func initialize(pmaze):
 
 func set_player_position():
 	targetPosition = Vector3(x - maze.cells.size() / 2, 0, y - maze.cells.size() / 2)
-	var cell = maze.cells[x][y]
-	print_debug("***")
-	print_debug("top: %s bottom: %s left: %s right: %s" % [cell.has_top_wall, cell.has_bottom_wall, cell.has_left_wall, cell.has_right_wall])
 
 
 func _process(delta):
@@ -37,18 +34,14 @@ func _process(delta):
 
 	if translation == targetPosition and velocity != Vector2.ZERO:
 		var cell = maze.cells[x][y]
-		print_debug(velocity, x, " ", y)
 		if velocity.x < 0 and !cell.has_left_wall:
 			x -= 1
 		if velocity.x > 0 and !cell.has_right_wall:
 			x += 1
 		if velocity.y < 0 and !cell.has_top_wall:
-			print_debug("going up")
 			y -= 1
 		if velocity.y > 0 and !cell.has_bottom_wall:
-			print_debug("going down")
 			y += 1
-		print_debug(x, " ", y)
 		set_player_position()
 
 	var direction = (targetPosition - translation).normalized()

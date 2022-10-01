@@ -8,22 +8,49 @@ var cells = []
 
 
 func _init(size):
-    cells = _generate_maze(size)
+	cells = _generate_maze(size)
 
 
 func _generate_maze(size):
-	var maze = []
+	var maze = _generate_cells(size)
 	var counter = 1
+	for column in maze:
+		for j in range(size):
+			var cell = CellData.new(counter)
+			counter += 1
+			column[j] = cell
+	while _has_multiple_areas(maze):
+		_unite_two_random_areas(maze)
+	var max_dist = 10
+	var min_dist = 3 # 3 does nothing, 4 is too much
+	for i in range(1, maze.size() - 1):
+		for j in range(1, maze.size() - 1):
+			print_debug(i, " ", j, " ", maze.size())
+			var distances = _distances_from(maze, i, j)
+			var cell = maze[i][j]
+			if cell.has_left_wall and (distances[i - 1][j] > max_dist or distances[i - 1][j] < min_dist):
+				cell.has_left_wall = false
+				maze[i - 1][j].has_right_wall = false
+			if cell.has_right_wall and (distances[i + 1][j] > max_dist or distances[i + 1][j] < min_dist):
+				cell.has_right_wall = false
+				maze[i + 1][j].has_left_wall = false
+			if cell.has_top_wall and (distances[i][j - 1] > max_dist or distances[i][j - 1] < min_dist):
+				cell.has_top_wall = false
+				maze[i][j - 1].has_bottom_wall = false
+			if cell.has_bottom_wall and (distances[i][j + 1] > max_dist or distances[i][j + 1] < min_dist):
+				cell.has_bottom_wall = false
+				maze[i][j + 1].has_top_wall = false
+	return maze
+
+
+func _generate_cells(size):
+	var result = []
 	for _i in range(size):
 		var column = []
 		for _j in range(size):
-			var cell = CellData.new(counter)
-			counter += 1
-			column.append(cell)
-		maze.append(column)
-	while _has_multiple_areas(maze):
-		_unite_two_random_areas(maze)
-	return maze
+			column.append(null)
+		result.append(column)
+	return result
 
 
 func _has_multiple_areas(maze):
@@ -77,4 +104,42 @@ func _paint_maze(maze, area1, area2):
 		for cell in column:
 			if cell.area == area1:
 				cell.area = area2
+
+
+func _distances_from(maze, x, y):
+	var result = _generate_cells(maze.size())
+	var queue = []
+	queue.push_back([x, y, 0])
+	result[x][y] = 0
+	while !queue.empty():
+		var el = queue.pop_front()
+		var cx = el[0]
+		var cy = el[1]
+		var dist = el[2]
+		var cell = maze[cx][cy]
+		if !cell.has_top_wall and result[cx][cy - 1] == null:
+			queue.push_back([cx, cy - 1, dist + 1])
+			result[cx][cy - 1] = dist + 1
+		if !cell.has_bottom_wall and result[cx][cy + 1] == null:
+			queue.push_back([cx, cy + 1, dist + 1])
+			result[cx][cy + 1] = dist + 1
+		if !cell.has_left_wall and result[cx - 1][cy] == null:
+			queue.push_back([cx - 1, cy, dist + 1])
+			result[cx - 1][cy] = dist + 1
+		if !cell.has_right_wall and result[cx + 1][cy] == null:
+			queue.push_back([cx + 1, cy, dist + 1])
+			result[cx + 1][cy] = dist + 1
+	return result
+
+
+func matrix_to_string(matrix, width):
+	var result = PoolStringArray()
+	var format_string = "%%%ss" % width
+	for j in range(matrix.size()):
+		var line = PoolStringArray()
+		for i in range(matrix.size()):
+			var cell = matrix[i][j]
+			line.append(format_string % cell)
+		result.append(" ".join(line))
+	return "\n".join(result)
 

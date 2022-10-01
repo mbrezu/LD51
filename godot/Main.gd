@@ -7,6 +7,7 @@ var Maze = preload("res://Maze.gd")
 
 
 func _ready():
+	randomize()
 	var size = 16
 	var maze = Maze.new(size)
 	for i in range(0, size):
