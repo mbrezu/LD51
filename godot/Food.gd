@@ -22,6 +22,8 @@ func set_food_position():
 
 func collect():
 	$AnimationPlayer.play("going_away")
+	remove_from_group("food")
 
-func _on_AnimationPlayer_animation_finished(_anim_name):
-	queue_free()
+func _on_AnimationPlayer_animation_finished(anim_name):
+	if anim_name == "going_away":
+		queue_free()
