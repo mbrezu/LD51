@@ -1,7 +1,14 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sound/zapThreeToneDown.ogg" type="AudioStream" id=3]
+[ext_resource path="res://sound/jingles_NES08.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sound/jingles_NES12.ogg" type="AudioStream" id=5]
+[ext_resource path="res://sound/jingles_NES13.ogg" type="AudioStream" id=6]
+[ext_resource path="res://sound/jingles_NES16.ogg" type="AudioStream" id=7]
+[ext_resource path="res://sound/twoTone1.ogg" type="AudioStream" id=8]
+[ext_resource path="res://sound/twoTone2.ogg" type="AudioStream" id=9]
 
 [sub_resource type="CubeMesh" id=1]
 size = Vector3( 300, 0.1, 300 )
@@ -23,6 +30,29 @@ shadow_enabled = true
 shadow_color = Color( 0.266667, 0.0313726, 0.0313726, 1 )
 
 [node name="HUD" parent="." instance=ExtResource( 2 )]
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="PlayerDeath" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 3 )
+
+[node name="Jingle1" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 4 )
+
+[node name="Jingle2" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 5 )
+
+[node name="Jingle3" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 6 )
+
+[node name="Jingle4" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 7 )
+
+[node name="Food1" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 8 )
+
+[node name="Food2" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource( 9 )
 
 [connection signal="counter_elapsed" from="HUD" to="." method="_on_HUD_counter_elapsed"]
 [connection signal="new_game" from="HUD" to="." method="_on_HUD_new_game"]

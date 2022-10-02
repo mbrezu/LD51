@@ -12,14 +12,29 @@ var player
 var maze
 var food_multiplier = 1
 
+var sound_jingles = []
+var sound_food = []
+
 
 func _ready():
 	randomize()
+	sound_jingles = [
+		$Sound/Jingle1,
+		$Sound/Jingle2,
+		$Sound/Jingle3,
+		$Sound/Jingle4
+	]
+	sound_food = [
+		$Sound/Food1,
+		$Sound/Food2
+	]
 	if !Global.first_time:
 		new_game()
 
 
 func new_game():
+	play_jingle()
+
 	var size = 15
 	maze = Maze.new(size)
 	for i in range(0, size):
@@ -40,6 +55,18 @@ func new_game():
 	spawn_food()
 
 	$HUD.new_game()
+
+
+func play_jingle():
+	if !sound_jingles.empty():
+		sound_jingles.shuffle()
+		sound_jingles[0].play()
+
+
+func play_food():
+	if !sound_food.empty():
+		sound_food.shuffle()
+		sound_food[0].play()
 
 
 func spawn_enemies():
@@ -91,6 +118,7 @@ func _on_HUD_counter_elapsed():
 	unapply_current_modification()
 	modification = Global.get_modification()
 	player.shake()
+	play_jingle()
 	apply_current_modification()
 
 
@@ -154,10 +182,12 @@ func apply_current_modification():
 
 func _on_player_food_collected():
 	$HUD.increment_score(food_multiplier)
+	play_food()
 
 
 func _on_player_died():
 	$HUD.game_over()
+	$Sound/PlayerDeath.play()
 
 
 func _on_HUD_new_game():
