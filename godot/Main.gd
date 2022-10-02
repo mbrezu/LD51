@@ -153,6 +153,8 @@ func unapply_current_modification():
 			food_multiplier = 1
 		Global.Modifications.KILL_SOME_GUARDS:
 			pass
+		Global.Modifications.FOOD_IS_POISON:
+			player.food_is_poison = false
 
 
 func apply_current_modification():
@@ -187,6 +189,8 @@ func apply_current_modification():
 			var guards_to_kill = guards.slice(0, int(guards.size() / 3))
 			for guard in guards_to_kill:
 				guard.kill()
+		Global.Modifications.FOOD_IS_POISON:
+			player.food_is_poison = true
 
 
 func _on_player_food_collected():

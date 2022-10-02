@@ -12,7 +12,7 @@ var speed = 3
 var face_up_rotation
 var alive = true
 var can_go_through_walls = false
-
+var food_is_poison = false
 
 func _ready():
 	face_up_rotation = $Body.rotation
@@ -108,13 +108,22 @@ func _process(delta):
 
 
 func _on_Area_area_entered(area):
-	if area.is_in_group("enemy") and alive:
-		alive = false
-		$AnimationPlayer.play("Death")
-		emit_signal("died")
+	if !alive:
+		return
+	if area.is_in_group("enemy"):
+		kill()
 	if area.is_in_group("food"):
-		emit_signal("food_collected")
-		area.collect()
+		if food_is_poison:
+			kill()
+		else:
+			emit_signal("food_collected")
+			area.collect()
+
+
+func kill():
+	alive = false
+	$AnimationPlayer.play("Death")
+	emit_signal("died")
 
 
 func _on_AnimationPlayer_animation_finished(anim_name:String):
