@@ -8,11 +8,12 @@ enum Modifications {
     FASTER_PLAYER,
     SLOWER_PLAYER,
     FASTER_ENEMIES,
-    SLOWER_ENEMIES
+    SLOWER_ENEMIES,
+    GO_THROUGH_WALLS
 }
 
 var _modifications_deck = [
-    Modifications.SLOWER_ENEMIES,
+    Modifications.GO_THROUGH_WALLS,
 ]
 
 var _modifications_left = []

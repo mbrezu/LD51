@@ -12,6 +12,7 @@ var target_position = Vector3.ZERO
 var speed = 3
 var face_up_rotation
 var alive = true
+var can_go_through_walls = false
 
 
 func _ready():
@@ -68,21 +69,32 @@ func _process(delta):
 
 	if translation == target_position and velocity != Vector2.ZERO:
 		var cell = maze.cells[x][y]
-		if velocity.x < 0 and !cell.has_left_wall:
-			x -= 1
+
+		if velocity.x < 0:
 			$Body.rotation = face_up_rotation
 			$Body.rotate(Vector3.UP, PI / 2)
-		if velocity.x > 0 and !cell.has_right_wall:
-			x += 1
+			if !cell.has_left_wall or can_go_through_walls:
+				x -= 1
+
+		if velocity.x > 0:
 			$Body.rotation = face_up_rotation
 			$Body.rotate(Vector3.UP, -PI / 2)
-		if velocity.y < 0 and !cell.has_top_wall:
-			y -= 1
+			if !cell.has_right_wall or can_go_through_walls:
+				x += 1
+
+		if velocity.y < 0:
 			$Body.rotation = face_up_rotation
-		if velocity.y > 0 and !cell.has_bottom_wall:
-			y += 1
+			if !cell.has_top_wall or can_go_through_walls:
+				y -= 1
+
+		if velocity.y > 0:
 			$Body.rotation = face_up_rotation
 			$Body.rotate(Vector3.UP, PI)
+			if !cell.has_bottom_wall or can_go_through_walls:
+				y += 1
+
+		x = clamp(x, 0, maze.cells.size() - 1)
+		y = clamp(y, 0, maze.cells.size() - 1)
 		set_player_position()
 
 	var direction = (target_position - translation).normalized()
