@@ -6,6 +6,11 @@ var maze = maze
 var velocity = Vector2.ZERO
 var target_position = Vector3.ZERO
 var speed = 3
+var face_up_rotation
+
+
+func _ready():
+	face_up_rotation = $Body.rotation
 
 
 func initialize(pmaze):
@@ -36,12 +41,19 @@ func _process(delta):
 		var cell = maze.cells[x][y]
 		if velocity.x < 0 and !cell.has_left_wall:
 			x -= 1
+			$Body.rotation = face_up_rotation
+			$Body.rotate(Vector3.UP, PI / 2)
 		if velocity.x > 0 and !cell.has_right_wall:
 			x += 1
+			$Body.rotation = face_up_rotation
+			$Body.rotate(Vector3.UP, -PI / 2)
 		if velocity.y < 0 and !cell.has_top_wall:
 			y -= 1
+			$Body.rotation = face_up_rotation
 		if velocity.y > 0 and !cell.has_bottom_wall:
 			y += 1
+			$Body.rotation = face_up_rotation
+			$Body.rotate(Vector3.UP, PI)
 		set_player_position()
 
 	var direction = (target_position - translation).normalized()
