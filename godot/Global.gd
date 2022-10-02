@@ -10,10 +10,10 @@ enum Modifications {
     FASTER_ENEMIES,
     SLOWER_ENEMIES,
     GO_THROUGH_WALLS,
-    RESPAWN_FOOD,
+    RESPAWN_FOOD, # triggered when no food left, don't add to deck.
     SPAWN_ENEMIES,
     DOUBLE_WORTH_FOOD,
-    KILL_SOME_GUARDS
+    KILL_SOME_GUARDS # triggered when there are too many guards, don't add to deck.
 }
 
 var _modifications_deck = [
@@ -21,16 +21,23 @@ var _modifications_deck = [
     Modifications.NONE,
     Modifications.NONE,
     Modifications.NONE,
+    Modifications.NONE,
+    Modifications.NONE,
+    Modifications.ZOOM_IN,
     Modifications.ZOOM_IN,
     Modifications.ZOOM_IN,
     Modifications.FASTER_PLAYER,
     Modifications.SLOWER_PLAYER,
     Modifications.FASTER_ENEMIES,
     Modifications.SLOWER_ENEMIES,
+    Modifications.SLOWER_ENEMIES,
+    Modifications.SLOWER_ENEMIES,
     Modifications.GO_THROUGH_WALLS,
-    Modifications.RESPAWN_FOOD,
+    Modifications.GO_THROUGH_WALLS,
+    Modifications.GO_THROUGH_WALLS,
     Modifications.SPAWN_ENEMIES,
-    Modifications.KILL_SOME_GUARDS,
+    Modifications.DOUBLE_WORTH_FOOD,
+    Modifications.DOUBLE_WORTH_FOOD,
     Modifications.DOUBLE_WORTH_FOOD,
     Modifications.DOUBLE_WORTH_FOOD,
 ]

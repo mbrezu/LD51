@@ -116,7 +116,12 @@ func _on_player_new_position(distances, px, py):
 
 func _on_HUD_counter_elapsed():
 	unapply_current_modification()
-	modification = Global.get_modification()
+	if get_tree().get_nodes_in_group("food").empty():
+		modification = Global.Modifications.RESPAWN_FOOD
+	elif get_tree().get_nodes_in_group("enemy").size() > 8:
+		modification = Global.Modifications.KILL_SOME_GUARDS
+	else:
+		modification = Global.get_modification()
 	player.shake()
 	play_jingle()
 	apply_current_modification()
@@ -177,7 +182,11 @@ func apply_current_modification():
 		Global.Modifications.DOUBLE_WORTH_FOOD:
 			food_multiplier = 2
 		Global.Modifications.KILL_SOME_GUARDS:
-			get_tree().call_group("enemy", "maybe_kill")
+			var guards = get_tree().get_nodes_in_group("enemy")
+			guards.shuffle()
+			var guards_to_kill = guards.slice(0, int(guards.size() / 3))
+			for guard in guards_to_kill:
+				guard.kill()
 
 
 func _on_player_food_collected():

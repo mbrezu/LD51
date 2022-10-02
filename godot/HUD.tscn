@@ -46,8 +46,8 @@ align = 2
 [node name="CounterLabel" type="Label" parent="UI"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -43.0
-margin_right = 43.0
+margin_left = -264.0
+margin_right = -178.0
 margin_bottom = 73.0
 theme = ExtResource( 1 )
 custom_fonts/font = ExtResource( 2 )

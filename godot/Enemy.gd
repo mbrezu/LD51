@@ -43,9 +43,8 @@ func new_player_position(distances, px, py):
 	player_distances = distances
 
 
-func maybe_kill():
-	if randf() > 0.5:
-		$AnimationPlayer.play("death")
+func kill():
+	$AnimationPlayer.play("death")
 
 
 func _negate_all(distances):
