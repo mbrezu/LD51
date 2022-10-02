@@ -49,6 +49,8 @@ func show_modification(modification):
 			$UI/ModificationLabel.text = "No modifications."
 		Global.Modifications.ZOOM_IN:
 			$UI/ModificationLabel.text = "Camera zoomed in."
+		Global.Modifications.FASTER_PLAYER:
+			$UI/ModificationLabel.text = "Player moves faster."
 
 
 func _on_GameOverTimer_timeout():

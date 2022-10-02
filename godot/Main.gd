@@ -85,6 +85,8 @@ func unapply_current_modification():
 	match modification:
 		Global.Modifications.NONE:
 			pass
+		Global.Modifications.FASTER_PLAYER:
+			player.set_normal_speed()
 		Global.Modifications.ZOOM_IN:
 			if player != null:
 				player.zoom_out()
@@ -95,6 +97,8 @@ func apply_current_modification():
 	match modification:
 		Global.Modifications.NONE:
 			pass
+		Global.Modifications.FASTER_PLAYER:
+			player.set_fast_speed()
 		Global.Modifications.ZOOM_IN:
 			if player != null:
 				player.zoom_in()

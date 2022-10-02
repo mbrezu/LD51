@@ -38,6 +38,14 @@ func zoom_out():
 	$Camera.zoom_out()
 
 
+func set_normal_speed():
+	speed = 3
+
+
+func set_fast_speed():
+	speed = 6
+
+
 func _process(delta):
 	if !alive:
 		return

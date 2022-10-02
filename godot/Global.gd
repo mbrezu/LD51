@@ -5,12 +5,11 @@ var first_time = true
 enum Modifications {
     NONE
     ZOOM_IN,
+    FASTER_PLAYER
 }
 
 var _modifications_deck = [
-    Modifications.ZOOM_IN,
-    Modifications.ZOOM_IN,
-    Modifications.ZOOM_IN,
+    Modifications.FASTER_PLAYER,
 ]
 
 var _modifications_left = []
