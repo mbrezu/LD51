@@ -34,10 +34,10 @@ func new_game():
 	player.connect("died", self, "_on_player_died")
 	add_child(player)
 
-	add_enemy(0, 0, maze)
-	add_enemy(0, size - 1, maze)
-	add_enemy(size - 1, 0, maze)
-	add_enemy(size - 1, size - 1, maze)
+	add_enemy(0, 0)
+	add_enemy(0, size - 1)
+	add_enemy(size - 1, 0)
+	add_enemy(size - 1, size - 1)
 
 	spawn_food()
 
@@ -50,28 +50,28 @@ func spawn_food():
 
 	for i in range(food_square_size):
 		for j in range(food_square_size):
-			add_food(i, j, maze)
+			add_food(i, j)
 
 	for i in range(size - food_square_size, size):
 		for j in range(food_square_size):
-			add_food(i, j, maze)
+			add_food(i, j)
 
 	for i in range(food_square_size):
 		for j in range(size - food_square_size, size):
-			add_food(i, j, maze)
+			add_food(i, j)
 
 	for i in range(size - food_square_size, size):
 		for j in range(size - food_square_size, size):
-			add_food(i, j, maze)
+			add_food(i, j)
 
 
-func add_enemy(x, y, maze):
+func add_enemy(x, y):
 	var enemy = enemy_scene.instance()
 	enemy.initialize(x, y, maze)
 	add_child(enemy)
 
 
-func add_food(x, y, maze):
+func add_food(x, y):
 	var food = food_scene.instance()
 	food.initialize(x, y, maze)
 	add_child(food)
