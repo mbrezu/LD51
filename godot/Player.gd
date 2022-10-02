@@ -46,6 +46,10 @@ func set_fast_speed():
 	speed = 6
 
 
+func set_slow_speed():
+	speed = 1.5
+
+
 func _process(delta):
 	if !alive:
 		return
