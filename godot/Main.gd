@@ -10,6 +10,7 @@ var Maze = preload("res://Maze.gd")
 var modification = Global.Modifications.NONE
 var player
 var maze
+var food_multiplier = 1
 
 
 func _ready():
@@ -114,6 +115,8 @@ func unapply_current_modification():
 			pass
 		Global.Modifications.SPAWN_ENEMIES:
 			pass
+		Global.Modifications.DOUBLE_WORTH_FOOD:
+			food_multiplier = 1
 
 
 func apply_current_modification():
@@ -140,10 +143,12 @@ func apply_current_modification():
 			spawn_food()
 		Global.Modifications.SPAWN_ENEMIES:
 			spawn_enemies()
+		Global.Modifications.DOUBLE_WORTH_FOOD:
+			food_multiplier = 2
 
 
 func _on_player_food_collected():
-	$HUD.increment_score(1)
+	$HUD.increment_score(food_multiplier)
 
 
 func _on_player_died():
