@@ -37,7 +37,7 @@ func set_enemy_position():
 func new_player_position(distances, px, py):
 	var size = maze.cells.size()
 	if !activated and (abs(px - x) <= size / 4 and abs(py - y) <= size / 4):
-		print_debug("*** player at: [%s, %s], enemy at [%s, %s] activated!" % [px, py, x, y])
+		#print_debug("*** player at: [%s, %s], enemy at [%s, %s] activated!" % [px, py, x, y])
 		activated = true
 		$AnimationPlayer.play("spin")
 	player_distances = distances
