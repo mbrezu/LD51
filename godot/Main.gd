@@ -34,14 +34,19 @@ func new_game():
 	player.connect("died", self, "_on_player_died")
 	add_child(player)
 
-	add_enemy(0, 0)
-	add_enemy(0, size - 1)
-	add_enemy(size - 1, 0)
-	add_enemy(size - 1, size - 1)
+	spawn_enemies()
 
 	spawn_food()
 
 	$HUD.new_game()
+
+
+func spawn_enemies():
+	var size = maze.cells.size()
+	add_enemy(0, 0)
+	add_enemy(0, size - 1)
+	add_enemy(size - 1, 0)
+	add_enemy(size - 1, size - 1)
 
 
 func spawn_food():
@@ -107,6 +112,8 @@ func unapply_current_modification():
 			player.can_go_through_walls = false
 		Global.Modifications.RESPAWN_FOOD:
 			pass
+		Global.Modifications.SPAWN_ENEMIES:
+			pass
 
 
 func apply_current_modification():
@@ -131,7 +138,8 @@ func apply_current_modification():
 		Global.Modifications.RESPAWN_FOOD:
 			get_tree().call_group("food", "collect")
 			spawn_food()
-
+		Global.Modifications.SPAWN_ENEMIES:
+			spawn_enemies()
 
 
 func _on_player_food_collected():

@@ -61,6 +61,8 @@ func show_modification(modification):
 			$UI/ModificationLabel.text = "Player can go through walls."
 		Global.Modifications.RESPAWN_FOOD:
 			$UI/ModificationLabel.text = "Coins respawned."
+		Global.Modifications.SPAWN_ENEMIES:
+			$UI/ModificationLabel.text = "More guards spawned."
 
 
 func _on_GameOverTimer_timeout():
