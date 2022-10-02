@@ -8,6 +8,7 @@ var target_position = Vector3.ZERO
 var speed = 1
 var player_distances
 var activated = false
+var hunted = false
 
 
 func initialize(px, py, pmaze):
@@ -30,6 +31,22 @@ func set_slow_speed():
 	speed = 0.5
 
 
+func set_hunted(value):
+	hunted = value
+	if hunted:
+		activated = true
+	animate()
+
+
+func animate():
+	if hunted:
+		$AnimationPlayer.play("run_away")
+	elif activated:
+		$AnimationPlayer.play("spin")
+	else:
+		$AnimationPlayer.stop()
+
+
 func set_enemy_position():
 	target_position = Vector3(x - maze.cells.size() / 2, 0, y - maze.cells.size() / 2)
 
@@ -39,7 +56,7 @@ func new_player_position(distances, px, py):
 	if !activated and (abs(px - x) <= size / 4 and abs(py - y) <= size / 4):
 		#print_debug("*** player at: [%s, %s], enemy at [%s, %s] activated!" % [px, py, x, y])
 		activated = true
-		$AnimationPlayer.play("spin")
+		animate()
 	player_distances = distances
 
 
@@ -66,7 +83,7 @@ func _process(delta):
 			return
 		var distance_here = player_distances[x][y]
 		var distances = player_distances
-		if randf() < .25: # 25% chances to run away this turn
+		if hunted:
 			distance_here = -distance_here
 			distances = _negate_all(player_distances)
 

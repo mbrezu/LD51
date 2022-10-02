@@ -13,6 +13,7 @@ var face_up_rotation
 var alive = true
 var can_go_through_walls = false
 var food_is_poison = false
+var hunt_enemies = false
 
 func _ready():
 	face_up_rotation = $Body.rotation
@@ -111,7 +112,12 @@ func _on_Area_area_entered(area):
 	if !alive:
 		return
 	if area.is_in_group("enemy"):
-		kill()
+		if hunt_enemies:
+			area.kill()
+			for _i in range(5):
+				emit_signal("food_collected")
+		else:
+			kill()
 	if area.is_in_group("food"):
 		if food_is_poison:
 			kill()

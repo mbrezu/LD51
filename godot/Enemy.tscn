@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 
@@ -66,6 +66,23 @@ tracks/1/keys = {
 "values": [ Vector3( 0, 0, 0 ), Vector3( 0, 0, 359 ) ]
 }
 
+[sub_resource type="Animation" id=7]
+resource_name = "run_away"
+length = 0.25
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot:translation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 0, 1, 0 ), Vector3( 0, 0, 0 ) ]
+}
+
 [sub_resource type="Animation" id=4]
 resource_name = "spin"
 length = 0.25
@@ -101,6 +118,7 @@ skeleton = NodePath("../..")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )
 anims/death = SubResource( 6 )
+anims/run_away = SubResource( 7 )
 anims/spin = SubResource( 4 )
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

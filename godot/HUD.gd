@@ -69,6 +69,8 @@ func show_modification(modification):
 			$UI/ModificationLabel.text = "Rumors say guards stepped into something."
 		Global.Modifications.FOOD_IS_POISON:
 			$UI/ModificationLabel.text = "Money is bad for you."
+		Global.Modifications.HUNT_ENEMIES:
+			$UI/ModificationLabel.text = "Hunt your enemies!"
 
 
 func _on_GameOverTimer_timeout():
