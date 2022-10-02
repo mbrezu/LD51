@@ -1,6 +1,7 @@
 extends Spatial
 
 signal new_position
+signal food_collected
 
 var x = 0
 var y = 0
@@ -62,9 +63,11 @@ func _process(delta):
 	var direction = (target_position - translation).normalized()
 	translation += direction * delta * speed
 
+
 func _on_Area_area_entered(area):
 	if area.is_in_group("enemy"):
 		print_debug("died!")
 	if area.is_in_group("food"):
-		print_debug("fed!")
+		emit_signal("food_collected")
 		area.collect()
+

@@ -10,7 +10,7 @@ var Maze = preload("res://Maze.gd")
 
 func _ready():
 	randomize()
-	var size = 16
+	var size = 20
 	var maze = Maze.new(size)
 	for i in range(0, size):
 		for j in range(0, size):
@@ -21,6 +21,7 @@ func _ready():
 	var player = player_scene.instance()
 	player.initialize(maze)
 	player.connect("new_position", self, "_on_player_new_position")
+	player.connect("food_collected", self, "_on_player_food_collected")
 	add_child(player)
 
 	add_enemy(1, 1, maze)
@@ -32,6 +33,8 @@ func _ready():
 		var x = randi() % size
 		var y = randi() % size
 		add_food(x, y, maze)
+
+	$HUD.new_game()
 
 
 func add_enemy(x, y, maze):
@@ -48,3 +51,11 @@ func add_food(x, y, maze):
 
 func _on_player_new_position(distances):
 	get_tree().call_group("enemy", "new_player_position", distances)
+
+
+func _on_HUD_counter_elapsed():
+	print_debug("timer elapsed")
+
+
+func _on_player_food_collected():
+	$HUD.increment_score(1)
