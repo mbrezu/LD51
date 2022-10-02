@@ -30,15 +30,28 @@ func new_game():
 	player.connect("died", self, "_on_player_died")
 	add_child(player)
 
-	add_enemy(1, 1, maze)
-	add_enemy(1, size - 2, maze)
-	add_enemy(size - 2, 1, maze)
-	add_enemy(size - 2, size - 2, maze)
+	add_enemy(0, 0, maze)
+	add_enemy(0, size - 1, maze)
+	add_enemy(size - 1, 0, maze)
+	add_enemy(size - 1, size - 1, maze)
 
-	for _i in range(size):
-		var x = randi() % size
-		var y = randi() % size
-		add_food(x, y, maze)
+	var food_square_size = int(size / 5)
+
+	for i in range(food_square_size):
+		for j in range(food_square_size):
+			add_food(i, j, maze)
+
+	for i in range(size - food_square_size, size):
+		for j in range(food_square_size):
+			add_food(i, j, maze)
+
+	for i in range(food_square_size):
+		for j in range(size - food_square_size, size):
+			add_food(i, j, maze)
+
+	for i in range(size - food_square_size, size):
+		for j in range(size - food_square_size, size):
+			add_food(i, j, maze)
 
 	$HUD.new_game()
 
@@ -55,8 +68,8 @@ func add_food(x, y, maze):
 	add_child(food)
 
 
-func _on_player_new_position(distances):
-	get_tree().call_group("enemy", "new_player_position", distances)
+func _on_player_new_position(distances, px, py):
+	get_tree().call_group("enemy", "new_player_position", distances, px, py)
 
 
 func _on_HUD_counter_elapsed():

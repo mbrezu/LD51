@@ -7,6 +7,7 @@ var maze
 var target_position = Vector3.ZERO
 var speed = 1
 var player_distances
+var activated = false
 
 
 func initialize(px, py, pmaze):
@@ -21,7 +22,10 @@ func set_enemy_position():
 	target_position = Vector3(x - maze.cells.size() / 2, 0, y - maze.cells.size() / 2)
 
 
-func new_player_position(distances):
+func new_player_position(distances, px, py):
+	if !activated and (abs(px - x) <= 4 and abs(py - y) <= 4):
+		print_debug("*** player at: [%s, %s], enemy at [%s, %s] activated!" % [px, py, x, y])
+		activated = true
 	player_distances = distances
 
 
@@ -39,7 +43,7 @@ func _process(delta):
 	if (translation - target_position).length() < 0.1:
 		translation = target_position
 
-	if (translation == target_position):
+	if activated and translation == target_position:
 		if player_distances == null:
 			return
 		var distance_here = player_distances[x][y]

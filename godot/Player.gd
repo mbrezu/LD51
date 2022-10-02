@@ -26,7 +26,7 @@ func initialize(pmaze):
 
 
 func set_player_position():
-	emit_signal("new_position", maze.get_distances_from(x, y))
+	emit_signal("new_position", maze.get_distances_from(x, y), x, y)
 	target_position = Vector3(x - maze.cells.size() / 2, 0, y - maze.cells.size() / 2)
 
 
