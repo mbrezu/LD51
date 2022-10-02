@@ -30,6 +30,14 @@ func set_player_position():
 	target_position = Vector3(x - maze.cells.size() / 2, 0, y - maze.cells.size() / 2)
 
 
+func zoom_in():
+	$Camera.zoom_in()
+
+
+func zoom_out():
+	$Camera.zoom_out()
+
+
 func _process(delta):
 	if !alive:
 		return

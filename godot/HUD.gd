@@ -43,6 +43,14 @@ func game_over():
 	$GameOverLabel.visible = true
 
 
+func show_modification(modification):
+	match modification:
+		Global.Modifications.NONE:
+			$UI/ModificationLabel.text = "No modifications."
+		Global.Modifications.ZOOM_IN:
+			$UI/ModificationLabel.text = "Camera zoomed in."
+
+
 func _on_GameOverTimer_timeout():
 	$Button.visible = true
 

@@ -7,6 +7,9 @@ var food_scene = load("res://Food.tscn")
 
 var Maze = preload("res://Maze.gd")
 
+var modification = Global.Modifications.NONE
+var player
+
 
 func _ready():
 	randomize()
@@ -23,7 +26,7 @@ func new_game():
 			cell.initialize(maze.cells[i][j])
 			cell.translate_object_local(Vector3(i - size / 2, 0, j - size / 2))
 			add_child(cell)
-	var player = player_scene.instance()
+	player = player_scene.instance()
 	player.initialize(maze)
 	player.connect("new_position", self, "_on_player_new_position")
 	player.connect("food_collected", self, "_on_player_food_collected")
@@ -73,7 +76,28 @@ func _on_player_new_position(distances, px, py):
 
 
 func _on_HUD_counter_elapsed():
-	print_debug("timer elapsed")
+	unapply_current_modification()
+	modification = Global.get_modification()
+	apply_current_modification()
+
+
+func unapply_current_modification():
+	match modification:
+		Global.Modifications.NONE:
+			pass
+		Global.Modifications.ZOOM_IN:
+			if player != null:
+				player.zoom_out()
+
+
+func apply_current_modification():
+	$HUD.show_modification(modification)
+	match modification:
+		Global.Modifications.NONE:
+			pass
+		Global.Modifications.ZOOM_IN:
+			if player != null:
+				player.zoom_in()
 
 
 func _on_player_food_collected():
