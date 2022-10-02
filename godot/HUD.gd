@@ -53,6 +53,8 @@ func show_modification(modification):
 			$UI/ModificationLabel.text = "Player moves faster."
 		Global.Modifications.SLOWER_PLAYER:
 			$UI/ModificationLabel.text = "Player moves slower."
+		Global.Modifications.FASTER_ENEMIES:
+			$UI/ModificationLabel.text = "Enemies move faster."
 
 
 func _on_GameOverTimer_timeout():

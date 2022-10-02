@@ -6,11 +6,12 @@ enum Modifications {
     NONE
     ZOOM_IN,
     FASTER_PLAYER,
-    SLOWER_PLAYER
+    SLOWER_PLAYER,
+    FASTER_ENEMIES
 }
 
 var _modifications_deck = [
-    Modifications.SLOWER_PLAYER,
+    Modifications.FASTER_ENEMIES,
 ]
 
 var _modifications_left = []

@@ -89,6 +89,8 @@ func unapply_current_modification():
 			player.set_normal_speed()
 		Global.Modifications.SLOWER_PLAYER:
 			player.set_normal_speed()
+		Global.Modifications.FASTER_ENEMIES:
+			get_tree().call_group("enemy", "set_normal_speed")
 		Global.Modifications.ZOOM_IN:
 			if player != null:
 				player.zoom_out()
@@ -103,6 +105,8 @@ func apply_current_modification():
 			player.set_fast_speed()
 		Global.Modifications.SLOWER_PLAYER:
 			player.set_slow_speed()
+		Global.Modifications.FASTER_ENEMIES:
+			get_tree().call_group("enemy", "set_fast_speed")
 		Global.Modifications.ZOOM_IN:
 			if player != null:
 				player.zoom_in()

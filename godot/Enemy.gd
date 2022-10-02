@@ -18,6 +18,14 @@ func initialize(px, py, pmaze):
 	translation = target_position
 
 
+func set_normal_speed():
+	speed = 1
+
+
+func set_fast_speed():
+	speed = 2
+
+
 func set_enemy_position():
 	target_position = Vector3(x - maze.cells.size() / 2, 0, y - maze.cells.size() / 2)
 
