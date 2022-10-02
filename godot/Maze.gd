@@ -25,6 +25,37 @@ func _generate_maze(size):
 			column[j] = cell
 	while _has_multiple_areas(maze):
 		_unite_two_random_areas(maze)
+	_tear_down_near_border_walls(maze)
+	_tear_down_random_walls(maze)
+	return maze
+
+
+func _tear_down_near_border_walls(maze):
+	var size = maze.size()
+	maze[0][0].has_bottom_wall = false
+	maze[0][0].has_right_wall = false
+	maze[0][size - 1].has_top_wall = false
+	maze[0][size - 1].has_right_wall = false
+	maze[size - 1][0].has_left_wall = false
+	maze[size - 1][0].has_bottom_wall = false
+	maze[size - 1][size - 1].has_left_wall = false
+	maze[size - 1][size - 1].has_top_wall = false
+	for i in range(1, size - 1):
+		var cell_left = maze[0][i]
+		cell_left.has_top_wall = false
+		cell_left.has_bottom_wall = false
+		var cell_right = maze[size - 1][i]
+		cell_right.has_top_wall = false
+		cell_right.has_bottom_wall = false
+		var cell_top = maze[i][0]
+		cell_top.has_left_wall = false
+		cell_top.has_right_wall = false
+		var cell_bottom = maze[i][size - 1]
+		cell_bottom.has_left_wall = false
+		cell_bottom.has_right_wall = false
+
+
+func _tear_down_random_walls(maze):
 	var max_dist = 10
 	var min_dist = 3 # 3 does nothing, 4 is too much
 	for i in range(1, maze.size() - 1):
@@ -44,7 +75,6 @@ func _generate_maze(size):
 			if cell.has_bottom_wall and (distances[i][j + 1] > max_dist or distances[i][j + 1] < min_dist):
 				cell.has_bottom_wall = false
 				maze[i][j + 1].has_top_wall = false
-	return maze
 
 
 func _generate_cells(size):
