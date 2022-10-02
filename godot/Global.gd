@@ -16,6 +16,20 @@ enum Modifications {
 }
 
 var _modifications_deck = [
+    Modifications.NONE,
+    Modifications.NONE,
+    Modifications.NONE,
+    Modifications.NONE,
+    Modifications.ZOOM_IN,
+    Modifications.ZOOM_IN,
+    Modifications.FASTER_PLAYER,
+    Modifications.SLOWER_PLAYER,
+    Modifications.FASTER_ENEMIES,
+    Modifications.SLOWER_ENEMIES,
+    Modifications.GO_THROUGH_WALLS,
+    Modifications.RESPAWN_FOOD,
+    Modifications.SPAWN_ENEMIES,
+    Modifications.DOUBLE_WORTH_FOOD,
     Modifications.DOUBLE_WORTH_FOOD,
 ]
 

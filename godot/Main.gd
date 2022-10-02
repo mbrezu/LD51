@@ -20,7 +20,7 @@ func _ready():
 
 
 func new_game():
-	var size = 20
+	var size = 15
 	maze = Maze.new(size)
 	for i in range(0, size):
 		for j in range(0, size):
