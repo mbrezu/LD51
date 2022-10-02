@@ -38,6 +38,7 @@ func new_player_position(distances, px, py):
 	if !activated and (abs(px - x) <= 4 and abs(py - y) <= 4):
 		print_debug("*** player at: [%s, %s], enemy at [%s, %s] activated!" % [px, py, x, y])
 		activated = true
+		$AnimationPlayer.play("spin")
 	player_distances = distances
 
 
