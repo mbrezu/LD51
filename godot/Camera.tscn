@@ -43,7 +43,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id=5]
 resource_name = "shake_x"
-length = 0.5
+length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera:translation")
@@ -52,15 +52,15 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.35, 0.5 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -3.8147e-06, 31.1373 ), Vector3( 2, 0, 31.137 ), Vector3( -2, 0, 31.137 ), Vector3( 0, -3.8147e-06, 31.1373 ) ]
+"values": [ Vector3( 0, -3.8147e-06, 31.1373 ), Vector3( 1, 0, 31.137 ), Vector3( -1, 0, 31.137 ), Vector3( 0, -3.8147e-06, 31.1373 ) ]
 }
 
 [sub_resource type="Animation" id=4]
 resource_name = "shake_y"
-length = 0.5
+length = 0.3
 step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera:translation")
@@ -69,10 +69,10 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15, 0.35, 0.5 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
-"values": [ Vector3( 0, -3.8147e-06, 31.1373 ), Vector3( 0, 2, 31.137 ), Vector3( 0, -2, 31.137 ), Vector3( 0, -3.8147e-06, 31.1373 ) ]
+"values": [ Vector3( 0, -3.8147e-06, 31.1373 ), Vector3( 0, 1, 31.137 ), Vector3( 0, -1, 31.137 ), Vector3( 0, -3.8147e-06, 31.1373 ) ]
 }
 
 [sub_resource type="Animation" id=2]
