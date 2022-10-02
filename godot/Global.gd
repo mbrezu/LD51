@@ -12,7 +12,8 @@ enum Modifications {
     GO_THROUGH_WALLS,
     RESPAWN_FOOD,
     SPAWN_ENEMIES,
-    DOUBLE_WORTH_FOOD
+    DOUBLE_WORTH_FOOD,
+    KILL_SOME_GUARDS
 }
 
 var _modifications_deck = [
@@ -29,6 +30,7 @@ var _modifications_deck = [
     Modifications.GO_THROUGH_WALLS,
     Modifications.RESPAWN_FOOD,
     Modifications.SPAWN_ENEMIES,
+    Modifications.KILL_SOME_GUARDS,
     Modifications.DOUBLE_WORTH_FOOD,
     Modifications.DOUBLE_WORTH_FOOD,
 ]

@@ -65,6 +65,8 @@ func show_modification(modification):
 			$UI/ModificationLabel.text = "More guards spawned."
 		Global.Modifications.DOUBLE_WORTH_FOOD:
 			$UI/ModificationLabel.text = "Coin value is doubled."
+		Global.Modifications.KILL_SOME_GUARDS:
+			$UI/ModificationLabel.text = "Rumors say guards stepped into something."
 
 
 func _on_GameOverTimer_timeout():

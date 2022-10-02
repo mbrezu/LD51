@@ -42,6 +42,11 @@ func new_player_position(distances, px, py):
 	player_distances = distances
 
 
+func maybe_kill():
+	if randf() > 0.5:
+		$AnimationPlayer.play("death")
+
+
 func _negate_all(distances):
 	var result = []
 	for i in range(distances.size()):
@@ -82,3 +87,8 @@ func _process(delta):
 	else:
 		var direction = (target_position - translation).normalized()
 		translation += direction * delta * speed
+
+
+func _on_AnimationPlayer_animation_finished(anim_name:String):
+	if anim_name == "death":
+		queue_free()

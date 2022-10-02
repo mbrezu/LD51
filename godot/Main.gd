@@ -118,6 +118,8 @@ func unapply_current_modification():
 			pass
 		Global.Modifications.DOUBLE_WORTH_FOOD:
 			food_multiplier = 1
+		Global.Modifications.KILL_SOME_GUARDS:
+			pass
 
 
 func apply_current_modification():
@@ -146,6 +148,8 @@ func apply_current_modification():
 			spawn_enemies()
 		Global.Modifications.DOUBLE_WORTH_FOOD:
 			food_multiplier = 2
+		Global.Modifications.KILL_SOME_GUARDS:
+			get_tree().call_group("enemy", "maybe_kill")
 
 
 func _on_player_food_collected():
