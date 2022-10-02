@@ -10,6 +10,11 @@ var Maze = preload("res://Maze.gd")
 
 func _ready():
 	randomize()
+	if !Global.first_time:
+		new_game()
+
+
+func new_game():
 	var size = 20
 	var maze = Maze.new(size)
 	for i in range(0, size):
@@ -22,6 +27,7 @@ func _ready():
 	player.initialize(maze)
 	player.connect("new_position", self, "_on_player_new_position")
 	player.connect("food_collected", self, "_on_player_food_collected")
+	player.connect("died", self, "_on_player_died")
 	add_child(player)
 
 	add_enemy(1, 1, maze)
@@ -59,3 +65,15 @@ func _on_HUD_counter_elapsed():
 
 func _on_player_food_collected():
 	$HUD.increment_score(1)
+
+
+func _on_player_died():
+	$HUD.game_over()
+
+
+func _on_HUD_new_game():
+	if Global.first_time:
+		new_game()
+		Global.first_time = false
+	else:
+		var _x = get_tree().reload_current_scene()

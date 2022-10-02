@@ -2,6 +2,7 @@ extends Spatial
 
 signal new_position
 signal food_collected
+signal died
 
 var x = 0
 var y = 0
@@ -10,6 +11,7 @@ var velocity = Vector2.ZERO
 var target_position = Vector3.ZERO
 var speed = 3
 var face_up_rotation
+var alive = true
 
 
 func _ready():
@@ -29,6 +31,9 @@ func set_player_position():
 
 
 func _process(delta):
+	if !alive:
+		return
+
 	if (translation - target_position).length() < 0.1:
 		translation = target_position
 
@@ -65,9 +70,15 @@ func _process(delta):
 
 
 func _on_Area_area_entered(area):
-	if area.is_in_group("enemy"):
-		print_debug("died!")
+	if area.is_in_group("enemy") and alive:
+		alive = false
+		$AnimationPlayer.play("Death")
+		emit_signal("died")
 	if area.is_in_group("food"):
 		emit_signal("food_collected")
 		area.collect()
 
+
+func _on_AnimationPlayer_animation_finished(anim_name:String):
+	if anim_name == "Death":
+		$Body.queue_free()

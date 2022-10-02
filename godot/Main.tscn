@@ -4,10 +4,10 @@
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CubeMesh" id=1]
-size = Vector3( 30, 0.1, 30 )
+size = Vector3( 300, 0.1, 300 )
 
 [sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.101961, 0.0862745, 0.0980392, 1 )
+albedo_color = Color( 0.129412, 0.101961, 0.117647, 1 )
 
 [node name="Main" type="Spatial"]
 script = ExtResource( 1 )
@@ -25,3 +25,4 @@ shadow_color = Color( 0.266667, 0.0313726, 0.0313726, 1 )
 [node name="HUD" parent="." instance=ExtResource( 2 )]
 
 [connection signal="counter_elapsed" from="HUD" to="." method="_on_HUD_counter_elapsed"]
+[connection signal="new_game" from="HUD" to="." method="_on_HUD_new_game"]
