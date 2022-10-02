@@ -39,6 +39,10 @@ func zoom_out():
 	$Camera.zoom_out()
 
 
+func shake():
+	$Camera.shake()
+
+
 func set_normal_speed():
 	speed = 3
 

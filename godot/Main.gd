@@ -90,6 +90,7 @@ func _on_player_new_position(distances, px, py):
 func _on_HUD_counter_elapsed():
 	unapply_current_modification()
 	modification = Global.get_modification()
+	player.shake()
 	apply_current_modification()
 
 
