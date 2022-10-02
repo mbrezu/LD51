@@ -37,7 +37,7 @@ transform = Transform( 1, 0, 0, 0, 0.286441, 0.958098, 0, -0.958098, 0.286441, 0
 [node name="Camera" type="Camera" parent="CameraPivot"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.8147e-06, 31.1373 )
 projection = 1
-size = 6.0
+size = 10.0
 
 [node name="Area" type="Area" parent="." groups=["player"]]
 

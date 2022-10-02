@@ -11,6 +11,10 @@ func _init(size):
 	cells = _generate_maze(size)
 
 
+func get_distances_from(x, y):
+	return _distances_from(cells, x, y)
+
+
 func _generate_maze(size):
 	var maze = _generate_cells(size)
 	var counter = 1
@@ -132,7 +136,7 @@ func _distances_from(maze, x, y):
 	return result
 
 
-func matrix_to_string(matrix, width):
+func _matrix_to_string(matrix, width):
 	var result = PoolStringArray()
 	var format_string = "%%%ss" % width
 	for j in range(matrix.size()):

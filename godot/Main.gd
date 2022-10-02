@@ -20,6 +20,7 @@ func _ready():
 			add_child(cell)
 	var player = player_scene.instance()
 	player.initialize(maze)
+	player.connect("new_position", self, "_on_player_new_position")
 	add_child(player)
 
 	add_enemy(1, 1, maze)
@@ -43,3 +44,7 @@ func add_food(x, y, maze):
 	var food = food_scene.instance()
 	food.initialize(x, y, maze)
 	add_child(food)
+
+
+func _on_player_new_position(distances):
+	get_tree().call_group("enemy", "new_player_position", distances)
