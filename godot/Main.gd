@@ -9,6 +9,7 @@ var Maze = preload("res://Maze.gd")
 
 var modification = Global.Modifications.NONE
 var player
+var maze
 
 
 func _ready():
@@ -19,7 +20,7 @@ func _ready():
 
 func new_game():
 	var size = 20
-	var maze = Maze.new(size)
+	maze = Maze.new(size)
 	for i in range(0, size):
 		for j in range(0, size):
 			var cell = cell_scene.instance()
@@ -38,6 +39,13 @@ func new_game():
 	add_enemy(size - 1, 0, maze)
 	add_enemy(size - 1, size - 1, maze)
 
+	spawn_food()
+
+	$HUD.new_game()
+
+
+func spawn_food():
+	var size = maze.cells.size()
 	var food_square_size = int(size / 5)
 
 	for i in range(food_square_size):
@@ -55,8 +63,6 @@ func new_game():
 	for i in range(size - food_square_size, size):
 		for j in range(size - food_square_size, size):
 			add_food(i, j, maze)
-
-	$HUD.new_game()
 
 
 func add_enemy(x, y, maze):
@@ -85,6 +91,9 @@ func unapply_current_modification():
 	match modification:
 		Global.Modifications.NONE:
 			pass
+		Global.Modifications.ZOOM_IN:
+			if player != null:
+				player.zoom_out()
 		Global.Modifications.FASTER_PLAYER:
 			player.set_normal_speed()
 		Global.Modifications.SLOWER_PLAYER:
@@ -96,9 +105,8 @@ func unapply_current_modification():
 		Global.Modifications.GO_THROUGH_WALLS:
 			get_tree().call_group("cell", "restore")
 			player.can_go_through_walls = false
-		Global.Modifications.ZOOM_IN:
-			if player != null:
-				player.zoom_out()
+		Global.Modifications.RESPAWN_FOOD:
+			pass
 
 
 func apply_current_modification():
@@ -120,6 +128,10 @@ func apply_current_modification():
 		Global.Modifications.ZOOM_IN:
 			if player != null:
 				player.zoom_in()
+		Global.Modifications.RESPAWN_FOOD:
+			get_tree().call_group("food", "collect")
+			spawn_food()
+
 
 
 func _on_player_food_collected():
