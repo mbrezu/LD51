@@ -149,9 +149,12 @@ func unapply_current_modification():
 			get_tree().call_group("enemy", "set_normal_speed")
 		Global.Modifications.SLOWER_ENEMIES:
 			get_tree().call_group("enemy", "set_normal_speed")
-		Global.Modifications.GO_THROUGH_WALLS:
+		Global.Modifications.PLAYER_GOES_THROUGH_WALLS:
 			get_tree().call_group("cell", "restore")
 			player.can_go_through_walls = false
+		Global.Modifications.ENEMIES_GO_THROUGH_WALLS:
+			get_tree().call_group("enemy", "go_through_walls", false)
+			get_tree().call_group("cell", "set_solid_wall")
 		Global.Modifications.RESPAWN_FOOD:
 			pass
 		Global.Modifications.SPAWN_ENEMIES:
@@ -181,9 +184,12 @@ func apply_current_modification():
 			get_tree().call_group("enemy", "set_fast_speed")
 		Global.Modifications.SLOWER_ENEMIES:
 			get_tree().call_group("enemy", "set_slow_speed")
-		Global.Modifications.GO_THROUGH_WALLS:
+		Global.Modifications.PLAYER_GOES_THROUGH_WALLS:
 			get_tree().call_group("cell", "sink")
 			player.can_go_through_walls = true
+		Global.Modifications.ENEMIES_GO_THROUGH_WALLS:
+			get_tree().call_group("enemy", "go_through_walls", true)
+			get_tree().call_group("cell", "set_broken_wall")
 		Global.Modifications.ZOOM_IN:
 			if player != null:
 				player.zoom_in()

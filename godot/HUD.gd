@@ -57,8 +57,10 @@ func show_modification(modification):
 			$UI/ModificationLabel.text = "Enemies move faster."
 		Global.Modifications.SLOWER_ENEMIES:
 			$UI/ModificationLabel.text = "Enemies move slower."
-		Global.Modifications.GO_THROUGH_WALLS:
+		Global.Modifications.PLAYER_GOES_THROUGH_WALLS:
 			$UI/ModificationLabel.text = "Player can go through walls."
+		Global.Modifications.ENEMIES_GO_THROUGH_WALLS:
+			$UI/ModificationLabel.text = "Enemies can go through walls."
 		Global.Modifications.RESPAWN_FOOD:
 			$UI/ModificationLabel.text = "Coins respawned."
 		Global.Modifications.SPAWN_ENEMIES:
