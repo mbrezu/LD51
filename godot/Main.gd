@@ -15,6 +15,8 @@ var food_multiplier = 1
 var sound_jingles = []
 var sound_food = []
 
+var center_food = false
+
 
 func _ready():
 	randomize()
@@ -79,23 +81,31 @@ func spawn_enemies():
 
 func spawn_food():
 	var size = maze.cells.size()
+	var mid = size / 2
 	var food_square_size = int(size / 5)
 
-	for i in range(food_square_size):
-		for j in range(food_square_size):
-			add_food(i, j)
+	if center_food:
+		for i in range(mid - food_square_size, mid + food_square_size):
+			for j in range(mid - food_square_size, mid + food_square_size):
+				add_food(i, j)
+	else:
+		for i in range(food_square_size):
+			for j in range(food_square_size):
+				add_food(i, j)
 
-	for i in range(size - food_square_size, size):
-		for j in range(food_square_size):
-			add_food(i, j)
+		for i in range(size - food_square_size, size):
+			for j in range(food_square_size):
+				add_food(i, j)
 
-	for i in range(food_square_size):
-		for j in range(size - food_square_size, size):
-			add_food(i, j)
+		for i in range(food_square_size):
+			for j in range(size - food_square_size, size):
+				add_food(i, j)
 
-	for i in range(size - food_square_size, size):
-		for j in range(size - food_square_size, size):
-			add_food(i, j)
+		for i in range(size - food_square_size, size):
+			for j in range(size - food_square_size, size):
+				add_food(i, j)
+
+	center_food = !center_food
 
 
 func add_enemy(x, y):
@@ -146,7 +156,7 @@ func min_player_food_distance():
 	var min_distance = 1000
 	for food in get_tree().get_nodes_in_group("food"):
 		var distance = (player.translation - food.translation).length()
-		print_debug(distance)
+		# print_debug(distance)
 		if distance < min_distance:
 			min_distance = distance
 	return min_distance
