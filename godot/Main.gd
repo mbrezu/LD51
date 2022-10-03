@@ -121,7 +121,10 @@ func _on_HUD_counter_elapsed():
 	if food_array.empty():
 		modification = Global.Modifications.RESPAWN_FOOD
 	elif enemy_array.size() > 8:
-		modification = Global.Modifications.KILL_SOME_GUARDS
+		if randf() < 0.5:
+			modification = Global.Modifications.KILL_SOME_GUARDS
+		else:
+			modification = Global.Modifications.HUNT_ENEMIES
 	elif enemy_array.empty():
 		modification = Global.Modifications.SPAWN_ENEMIES
 	else:
