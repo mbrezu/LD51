@@ -155,6 +155,7 @@ func unapply_current_modification():
 			pass
 		Global.Modifications.FOOD_IS_POISON:
 			player.food_is_poison = false
+			get_tree().call_group("food", "set_food")
 		Global.Modifications.HUNT_ENEMIES:
 			player.hunt_enemies = false
 			get_tree().call_group("enemy", "set_hunted", false)
@@ -194,6 +195,7 @@ func apply_current_modification():
 				guard.kill()
 		Global.Modifications.FOOD_IS_POISON:
 			player.food_is_poison = true
+			get_tree().call_group("food", "set_poison")
 		Global.Modifications.HUNT_ENEMIES:
 			player.hunt_enemies = true
 			get_tree().call_group("enemy", "set_hunted", true)
