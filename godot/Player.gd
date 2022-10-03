@@ -198,6 +198,9 @@ func _on_Area_area_entered(area):
 
 func kill():
 	alive = false
+	$Body.cast_shadow = false
+	$Body/LeftArm.cast_shadow = false
+	$Body/RightArm.cast_shadow = false
 	$AnimationPlayer.play("Death")
 	emit_signal("died")
 

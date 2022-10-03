@@ -13,6 +13,7 @@ func _ready():
 
 
 func collect():
+	$MeshInstance.cast_shadow = false
 	$AnimationPlayer.play("going_away")
 	remove_from_group("food")
 

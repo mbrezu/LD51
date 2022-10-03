@@ -61,6 +61,7 @@ func new_player_position(distances, px, py):
 
 
 func kill():
+	$Pivot/MeshInstance.cast_shadow = false
 	$AnimationPlayer.play("death")
 
 
