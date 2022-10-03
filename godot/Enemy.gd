@@ -18,6 +18,7 @@ var hunted = false
 var can_go_through_walls = false
 var player_x = 0
 var player_y = 0
+var alive = true
 
 
 func _ready():
@@ -62,6 +63,8 @@ func go_through_walls(value):
 
 
 func set_hunted(value):
+	if !alive:
+		return
 	hunted = value
 	if hunted:
 		set_food()
@@ -79,6 +82,8 @@ func set_food():
 
 
 func animate():
+	if !alive:
+		return
 	if hunted:
 		$AnimationPlayer.play("run_away")
 	elif activated:
@@ -103,6 +108,7 @@ func new_player_position(distances, px, py):
 
 
 func kill():
+	alive = false
 	$Pivot/MeshInstance.cast_shadow = false
 	$AnimationPlayer.play("death")
 

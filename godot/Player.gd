@@ -186,7 +186,7 @@ func _on_Area_area_entered(area):
 			area.kill()
 			for _i in range(5):
 				emit_signal("food_collected")
-		else:
+		elif area.alive:
 			kill()
 	if area.is_in_group("food"):
 		if food_is_poison:
