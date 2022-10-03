@@ -195,6 +195,7 @@ func apply_current_modification():
 				player.zoom_in()
 		Global.Modifications.RESPAWN_FOOD:
 			get_tree().call_group("food", "collect")
+			get_tree().call_group("enemy", "increase_speed")
 			spawn_food()
 		Global.Modifications.SPAWN_ENEMIES:
 			spawn_enemies()

@@ -9,6 +9,8 @@ var x
 var y
 var maze
 var target_position = Vector3.ZERO
+var base_speed = 1
+var speed_increase = 0
 var speed = 1
 var player_distances
 var activated = false
@@ -29,15 +31,28 @@ func initialize(px, py, pmaze):
 
 
 func set_normal_speed():
-	speed = 1
+	base_speed = 1
+	recalc_speed()
 
 
 func set_fast_speed():
-	speed = 2
+	base_speed = 2
+	recalc_speed()
 
 
 func set_slow_speed():
-	speed = 0.5
+	base_speed = 0.5
+	recalc_speed()
+
+
+func recalc_speed():
+	speed = base_speed * (1 + speed_increase)
+
+
+func increase_speed():
+	speed_increase += 0.1
+	# print_debug("speed increase is ", speed_increase)
+	recalc_speed()
 
 
 func go_through_walls(value):
