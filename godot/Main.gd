@@ -116,10 +116,14 @@ func _on_player_new_position(distances, px, py):
 
 func _on_HUD_counter_elapsed():
 	unapply_current_modification()
-	if get_tree().get_nodes_in_group("food").empty():
+	var food_array = get_tree().get_nodes_in_group("food")
+	var enemy_array = get_tree().get_nodes_in_group("enemy")
+	if food_array.empty():
 		modification = Global.Modifications.RESPAWN_FOOD
-	elif get_tree().get_nodes_in_group("enemy").size() > 8:
+	elif enemy_array.size() > 8:
 		modification = Global.Modifications.KILL_SOME_GUARDS
+	elif enemy_array.empty():
+		modification = Global.Modifications.SPAWN_ENEMIES
 	else:
 		modification = Global.get_modification()
 	player.shake()

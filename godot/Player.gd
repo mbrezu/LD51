@@ -108,10 +108,10 @@ func decide_future_movement():
 	if Input.is_action_pressed("ui_down") and (!cell.has_bottom_wall or can_go_through_walls):
 		velocities.push_back([Vector2.DOWN, "ui_down"])
 
-	if !velocities.empty():
-		print_debug("alternatives")
-		for v in velocities:
-			print_debug(v[0], " ", v[1])
+#	if !velocities.empty():
+		#print_debug("alternatives")
+		# for v in velocities:
+		# 	print_debug(v[0], " ", v[1])
 
 	# By default we don't move.
 	var velocity = Vector2.ZERO
@@ -144,7 +144,7 @@ func decide_future_movement():
 			action_forward = "ui_down"
 			action_backward = "ui_up"
 
-		print_debug("decided on ", velocity)
+		# print_debug("decided on ", velocity)
 
 		if velocity.x < 0:
 			$Body.rotation = face_up_rotation
