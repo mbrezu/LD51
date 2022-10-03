@@ -129,9 +129,27 @@ func _on_HUD_counter_elapsed():
 		modification = Global.Modifications.SPAWN_ENEMIES
 	else:
 		modification = Global.get_modification()
+	if modification == Global.Modifications.FOOD_IS_POISON:
+		if min_player_food_distance() < 3:
+			var to_put_back = []
+			while modification == Global.Modifications.FOOD_IS_POISON:
+				to_put_back.push_back(modification)
+				modification = Global.get_modification()
+			for mod in to_put_back:
+				Global.put_back_modification(mod)
 	player.shake()
 	play_jingle()
 	apply_current_modification()
+
+
+func min_player_food_distance():
+	var min_distance = 1000
+	for food in get_tree().get_nodes_in_group("food"):
+		var distance = (player.translation - food.translation).length()
+		print_debug(distance)
+		if distance < min_distance:
+			min_distance = distance
+	return min_distance
 
 
 func unapply_current_modification():

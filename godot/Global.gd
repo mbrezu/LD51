@@ -64,3 +64,7 @@ func get_modification():
 			_modifications_left.push_back(mod)
 		_modifications_left.shuffle()
 	return _modifications_left.pop_back()
+
+
+func put_back_modification(modification):
+	_modifications_left.push_front(modification)
