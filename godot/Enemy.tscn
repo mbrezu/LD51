@@ -1,6 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
+[ext_resource path="res://PoisonMaterial.tres" type="Material" id=2]
+[ext_resource path="res://FoodMaterial.tres" type="Material" id=3]
 
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.2, 1, 0.2 )
@@ -103,6 +105,8 @@ tracks/0/keys = {
 
 [node name="Enemy" type="Area" groups=["enemy"]]
 script = ExtResource( 1 )
+food_material = ExtResource( 3 )
+poison_material = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )

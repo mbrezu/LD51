@@ -1,6 +1,10 @@
 extends Area
 
 
+export (Material) var food_material
+export (Material) var poison_material
+
+
 var x
 var y
 var maze
@@ -9,6 +13,10 @@ var speed = 1
 var player_distances
 var activated = false
 var hunted = false
+
+
+func _ready():
+	set_poison()
 
 
 func initialize(px, py, pmaze):
@@ -35,7 +43,19 @@ func set_hunted(value):
 	hunted = value
 	if hunted:
 		activated = true
+	if hunted:
+		set_food()
+	else:
+		set_poison()
 	animate()
+
+
+func set_poison():
+	$Pivot/MeshInstance.set_surface_material(0, poison_material)
+
+
+func set_food():
+	$Pivot/MeshInstance.set_surface_material(0, food_material)
 
 
 func animate():

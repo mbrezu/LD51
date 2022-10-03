@@ -22,6 +22,7 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 	if anim_name == "going_away":
 		queue_free()
 
+
 func set_poison():
 	$MeshInstance.set_surface_material(0, poison_material)
 
