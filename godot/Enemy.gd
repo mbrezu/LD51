@@ -16,6 +16,8 @@ var player_distances
 var activated = false
 var hunted = false
 var can_go_through_walls = false
+var player_x = 0
+var player_y = 0
 
 
 func _ready():
@@ -62,8 +64,6 @@ func go_through_walls(value):
 func set_hunted(value):
 	hunted = value
 	if hunted:
-		activated = true
-	if hunted:
 		set_food()
 	else:
 		set_poison()
@@ -98,6 +98,8 @@ func new_player_position(distances, px, py):
 		activated = true
 		animate()
 	player_distances = distances
+	player_x = px
+	player_y = py
 
 
 func kill():
@@ -137,30 +139,35 @@ func _process(delta):
 			distance_here = -distance_here
 			distances = _negate_all(player_distances)
 
-		var candidates = []
-		var size = maze.cells.size()
-		if y > 0:
-			if (!maze.cells[x][y].has_top_wall or can_go_through_walls) and distances[x][y - 1] < distance_here:
-				candidates.append([0, -1, distances[x][y - 1] - distance_here])
-		if y < size - 1:
-			if (!maze.cells[x][y].has_bottom_wall or can_go_through_walls) and distances[x][y + 1] < distance_here:
-				candidates.append([0, 1, distances[x][y + 1] - distance_here])
-		if x > 0:
-			if (!maze.cells[x][y].has_left_wall or can_go_through_walls) and distances[x - 1][y] < distance_here:
-				candidates.append([-1, 0, distances[x - 1][y] - distance_here])
-		if x < size - 1:
-			if (!maze.cells[x][y].has_right_wall or can_go_through_walls) and distances[x + 1][y] < distance_here:
-				candidates.append([1, 0, distances[x + 1][y] - distance_here])
-		var min_dist = 0
 		var best_candidate = null
 		if can_go_through_walls:
-			for candidate in candidates:
-				var dist = candidate[2]
-				if best_candidate == null or dist < min_dist:
-					min_dist = dist
-					best_candidate = candidate
-		elif !candidates.empty():
-			best_candidate = candidates[randi() % candidates.size()]
+			var dx = 0
+			var dy = 0
+			if x == player_x:
+				dx = 0
+				dy = player_y - y
+			else:
+				dx = player_x - x
+				dy = 0
+			best_candidate = [dx, dy]
+		else:
+			var candidates = []
+			var size = maze.cells.size()
+			if y > 0:
+				if (!maze.cells[x][y].has_top_wall or can_go_through_walls) and distances[x][y - 1] < distance_here:
+					candidates.append([0, -1])
+			if y < size - 1:
+				if (!maze.cells[x][y].has_bottom_wall or can_go_through_walls) and distances[x][y + 1] < distance_here:
+					candidates.append([0, 1])
+			if x > 0:
+				if (!maze.cells[x][y].has_left_wall or can_go_through_walls) and distances[x - 1][y] < distance_here:
+					candidates.append([-1, 0])
+			if x < size - 1:
+				if (!maze.cells[x][y].has_right_wall or can_go_through_walls) and distances[x + 1][y] < distance_here:
+					candidates.append([1, 0])
+			if !candidates.empty():
+				best_candidate = candidates[randi() % candidates.size()]
+
 		if best_candidate != null:
 			var direction = best_candidate
 			x += direction[0]
